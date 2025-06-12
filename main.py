@@ -8,8 +8,8 @@ import os
 
 app = Flask(__name__)
 
-STEAM_API_KEY = os.getenv("STEAM_API_KEY")
-STEAM_ID = os.getenv("STEAM_ID")
+STEAM_API_KEY = os.getenv("63336F1C1D1F2C54C4C4E06B3E5D766B")
+STEAM_ID = os.getenv("76561199018299083")
 
 status_history = []
 
