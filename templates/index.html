@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <title>Steam Status Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        table { border-collapse: collapse; width: 100%; max-width: 600px; }
+        th, td { border: 1px solid #ccc; padding: 8px; }
+        th { background-color: #eee; }
+    </style>
+</head>
+<body>
+    <h1>Steam Status Verlauf</h1>
+    <table id="log">
+        <thead>
+            <tr><th>Zeit</th><th>Status</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        async function updateTable() {
+            const res = await fetch('/api/statuslog');
+            const data = await res.json();
+            const tbody = document.querySelector('#log tbody');
+            tbody.innerHTML = '';
+            data.reverse().forEach(entry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${entry.time}</td><td>${entry.status}</td>`;
+                tbody.appendChild(row);
+            });
+        }
+        updateTable();
+        setInterval(updateTable, 60000);
+    </script>
+</body>
+</html>
